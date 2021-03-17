@@ -5,7 +5,10 @@ import Header from "./Header/Header.js"
 import Home from "./Home/Home.js"
 import Map from "./Map/Map.js"
 
-const routes = [
+// THIS PAGE'S CSS
+import "./App.css"
+
+const routes = [ // Handles all the routes
   {
     path: "/map",
     component: Map
@@ -31,19 +34,21 @@ function Routes(route) {
 function App() {
   return (
     <BrowserRouter>
-      <Header
-          routes={routes}
-      />
+      <div className="page">
+        <Header
+            routes={routes}
+        />
 
-      <div className="content">
-        {
-          // Switches each page's app content
-        }
-        <Switch>
-          {routes.map((route, i) => (
-            <Routes key={i} {...route} />
-          ))}
-        </Switch>
+        <div>
+          {
+            // Switches each page's app content
+          }
+          <Switch>
+            {routes.map((route, i) => (
+              <Routes key={i} {...route} />
+            ))}
+          </Switch>
+        </div>
       </div>
     </BrowserRouter>
   );

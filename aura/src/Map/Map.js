@@ -1,10 +1,9 @@
 import React from "react";
+import MapContainer from "./MapContainer/MapContainer.js"
 
 function TempThing() {
   return (
-    <h1>
-      Map time
-    </h1>
+    <MapContainer />
   )
 }
 
