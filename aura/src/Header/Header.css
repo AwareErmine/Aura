@@ -1,6 +1,6 @@
 nav a {
-  padding: 1ch;
   font-size: clamp(14px, 1rem + 2vw, 40px);
+  padding: 1ch;
   text-decoration: none;
 }
 
@@ -10,4 +10,8 @@ nav a:visited {
 
 nav a:hover {
   color: #222222e0;
+}
+
+nav {
+  margin-left: 10px;
 }
