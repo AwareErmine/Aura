@@ -34,10 +34,19 @@ export function TreeMarkers(url) {
 
 export function Markers(props) {
   const valid_entries = props.datasets.filter((entry) => entry.on)
-  return (valid_entries.map((entry) => {
-    return (
-      entry.on ? <entry.markers url={entry.url} />
-      : null
-    )
-  }))
+  console.log("hello");
+  return (
+    <Marker
+      position={{
+        lat: 40.712742,
+        lng: -74.013382
+      }}
+    />
+  )
+  // return (valid_entries.map((entry) => {
+  //   return (
+  //     entry.on ? <entry.markers url={entry.url} />
+  //     : null
+  //   )
+  // }))
 }

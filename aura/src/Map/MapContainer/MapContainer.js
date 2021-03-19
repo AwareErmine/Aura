@@ -14,16 +14,10 @@ function MapContainer(props) {
         initialCenter={props.center}
         style={mapStyles}
     >
-      <Marker
-        position={{
-          lat: 40.712742,
-          lng: -74.013382
-        }}
-      />
       {
-      // <props.markers
-      //   datasets={props.datasets}
-      // />
+        props.markers({
+          datasets: props.datasets
+        })
       }
     </ GoogleMapReact>
   )
