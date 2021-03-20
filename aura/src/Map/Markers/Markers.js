@@ -3,14 +3,44 @@ import { Marker } from 'google-maps-react';
 
 // const AnyReactComponent = ({ text }) => <div classname="test">{text}</div>;
 
-export function TreeMarker(props) {
-  console.log("HIIIII FROM THE MARKER");
+export function TreeMarker(datapoint) {
   return (
-    <Marker key={props.key} id={props.key} position={{
-       lat: props.lat,
-       lng: props.lng
-     }}
-     onClick={() => console.log("Hehe that tickles")}
+    <Marker
+      key={Math.random().toString()}
+      id={datapoint["tree_id"]}
+      position={{
+        lat: datapoint["latitude"],
+        lng: datapoint["longitude"]
+      }}
+      onClick={() => console.log("I'm a tree!")}
+     />
+  )
+}
+
+export function RodentMarker(datapoint) {
+  return (
+    <Marker
+      key={Math.random().toString()}
+      id={datapoint["job_id"]}
+      position={{
+        lat: datapoint["latitude"],
+        lng: datapoint["longitude"]
+      }}
+      onClick={() => console.log("I'm a rodent inspection!")}
+     />
+  )
+}
+
+export function SquirrelMarker(datapoint) {
+  return (
+    <Marker
+      key={Math.random().toString()}
+      id={datapoint["tree_id"]}
+      position={{
+        lat: datapoint["y"],
+        lng: datapoint["x"]
+      }}
+      onClick={() => console.log("I'm a squirrel!")}
      />
   )
 }
