@@ -34,9 +34,11 @@ function Routes(route) {
 function App() {
   return (
     <BrowserRouter>
-      <Header
-          routes={routes}
-      />
+    {
+      // <Header
+      //     routes={routes}
+      // />
+    }
 
       <Switch>
         {routes.map((route, i) => (

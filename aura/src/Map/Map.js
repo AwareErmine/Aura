@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { TreeMarker, RodentMarker, SquirrelMarker } from "./Markers/Markers.js";
 import GoogleMapReact, { GoogleApiWrapper, Marker } from 'google-maps-react';
 import axios from "axios";
+import "./Map.css"
 
 var initial_datasets = [
   {
@@ -27,7 +28,7 @@ var initial_datasets = [
 
 const containerStyle = {
   width: '100%',
-  height: 'calc(99% - clamp(14px, 1rem + 2vw, 40px) - 2ch)'
+  height: 'calc(99% - clamp(14px, 1rem + 2vw, 40px) - 3ch)'
  };
 
 function Map(props) {
@@ -83,11 +84,11 @@ function Map(props) {
   function MakeCheckBoxes() {
     return datasets.map( (dataset) => {
       return (
-        <label>{dataset.name}
+        <label className="container">{dataset.name}
           <input type="checkbox"
             onChange={ () => handleCheckboxChange(dataset) }
           />
-          <span></span>
+          <span className="checkmark"></span>
         </label>
       )
     })
@@ -95,7 +96,9 @@ function Map(props) {
 
   return (
     <>
-      { MakeCheckBoxes() }
+      <div className="checkboxes">
+        { MakeCheckBoxes() }
+      </div>
       <GoogleMapReact
           google={props.google}
           zoom={11}

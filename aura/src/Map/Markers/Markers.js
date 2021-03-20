@@ -1,6 +1,6 @@
 import React from "react";
 import { Marker } from 'google-maps-react';
-
+import "./Markers.css";
 // const AnyReactComponent = ({ text }) => <div classname="test">{text}</div>;
 
 export function TreeMarker(datapoint) {
