@@ -34,22 +34,15 @@ function Routes(route) {
 function App() {
   return (
     <BrowserRouter>
-      <div className="page">
-        <Header
-            routes={routes}
-        />
+      <Header
+          routes={routes}
+      />
 
-        <div>
-          {
-            // Switches each page's app content
-          }
-          <Switch>
-            {routes.map((route, i) => (
-              <Routes key={i} {...route} />
-            ))}
-          </Switch>
-        </div>
-      </div>
+      <Switch>
+        {routes.map((route, i) => (
+          <Routes key={i} {...route} />
+        ))}
+      </Switch>
     </BrowserRouter>
   );
 }

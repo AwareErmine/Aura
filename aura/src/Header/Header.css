@@ -9,9 +9,9 @@ nav a:visited {
 }
 
 nav a:hover {
-  color: #222222e0;
+  color: #ffffffe0;
 }
 
 nav {
-  margin-left: 10px;
+  padding: 1ch;
 }
