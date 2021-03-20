@@ -28,7 +28,7 @@ var initial_datasets = [
 
 const containerStyle = {
   width: '100%',
-  height: 'calc(99% - clamp(14px, 1rem + 2vw, 40px) - 3ch)'
+  height: '1100px'
  };
 
 function Map(props) {

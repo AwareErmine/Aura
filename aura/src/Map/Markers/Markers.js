@@ -1,7 +1,9 @@
 import React from "react";
 import { Marker } from 'google-maps-react';
-import "./Markers.css";
-// const AnyReactComponent = ({ text }) => <div classname="test">{text}</div>;
+
+import tree from './tree.png';
+import rodent from './rodent.png';
+import squirrel from './squirrel.png'
 
 export function TreeMarker(datapoint) {
   return (
@@ -12,8 +14,13 @@ export function TreeMarker(datapoint) {
         lat: datapoint["latitude"],
         lng: datapoint["longitude"]
       }}
-      onClick={() => console.log("I'm a tree!")}
-     />
+      alt="tree"
+      icon={{
+        url: tree,
+        anchor: new window.google.maps.Point(5, 58),
+      }}
+      onClick={() => alert(`${datapoint["status"]} ${datapoint["spc_common"]} from ${datapoint["created_at"].substring(0, 4)}`)}
+    />
   )
 }
 
@@ -26,7 +33,11 @@ export function RodentMarker(datapoint) {
         lat: datapoint["latitude"],
         lng: datapoint["longitude"]
       }}
-      onClick={() => console.log("I'm a rodent inspection!")}
+      icon={{
+        url: rodent,
+        anchor: new window.google.maps.Point(5, 58),
+      }}
+      onClick={() => alert(`Rodent ${datapoint["inspection_type"]} inspection from ${datapoint["inspection_date"].substring(0, 4)} result: ${datapoint["result"]}`)}
      />
   )
 }
@@ -40,7 +51,11 @@ export function SquirrelMarker(datapoint) {
         lat: datapoint["y"],
         lng: datapoint["x"]
       }}
-      onClick={() => console.log("I'm a squirrel!")}
+      icon={{
+        url: squirrel,
+        anchor: new window.google.maps.Point(5, 58),
+      }}
+      onClick={() => alert(`There was a ${datapoint["combination_of_primary_and"]} squirrel here once in ${datapoint["date"].slice(datapoint["date"].length - 4)}`)}
      />
   )
 }
