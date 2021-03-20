@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import MapContainer from "./MapContainer/MapContainer.js";
 import { TreeMarker, } from "./Markers/Markers.js";
-import GoogleMapReact, { GoogleApiWrapper } from 'google-maps-react';
+import GoogleMapReact, { GoogleApiWrapper, Marker } from 'google-maps-react';
 import axios from "axios";
 
 var initial_datasets = [
@@ -25,7 +25,7 @@ var initial_datasets = [
 
 const containerStyle = {
   width: '100%',
-  height: '750px'
+  height: 'calc(99% - clamp(14px, 1rem + 2vw, 40px) - 2ch)'
  };
 
 function Map(props) {
@@ -33,7 +33,6 @@ function Map(props) {
 
   const getData = async (url) => {
     const response = await axios.get(url);
-    console.log("DATA", response.data);
     return response.data;
   }
 
@@ -43,35 +42,44 @@ function Map(props) {
       let data = getData(entry.url);
       data.then( (result) => {
         entry.data = result;
+        console.log("STILL IN THEN", JSON.stringify(entry.data));
       })
+      console.log("OUT OF THEN", JSON.stringify(entry.data))
     }
-    setDatasets(initial_datasets)
+    console.log("DATA AFTER ADDING DATA", initial_datasets[0].data);
+    console.log("INITIAL DATASETS", JSON.stringify(initial_datasets));
+    console.log("WHAT CHROME SEES AS THE OBJ", initial_datasets)
+    setDatasets(initial_datasets);
   }, [])
 
   function DisplayMarkers() {
     const on_data = datasets.filter( (entry) => entry.on );
     console.log("ON", on_data);
-    if (on_data) {
-      var markers = [];
-      for (var i in datasets) {
-        let entry = datasets[i];
-        markers.concat(
-          entry.data ? entry.data.map( (datapoint) => {
-            return (
-              entry.marker({
-                lat: datapoint["latitude"],
-                lng: datapoint["longitude"],
-                key: datapoint["tree_id"]
-              })
-            )
-          })
-        : [null]
-      )}
-      return markers;
-    } else {
-      console.log("NO DATA YET")
-      return null
-    }
+
+    var markers = [];
+    for (var i in on_data) {
+      let entry = on_data[i];
+      console.log("THE ENTRY", JSON.stringify(entry));
+      console.log("ENTRY DATA", entry.data);
+      console.log("AFTER RENDER", entry)
+      console.log("THERE IS DATA", entry.hasOwnProperty("data"));
+      markers = markers.concat(
+        entry.data ? entry.data.map( (datapoint) => {
+          return (
+            entry.marker({
+              lat: datapoint["latitude"],
+              lng: datapoint["longitude"],
+              key: datapoint["tree_id"]
+            })
+          )
+        })
+        : [<Marker key="asdfasdf" id="asdfasdf" position={{
+           lat: 40.712742,
+           lng: -74.013382
+         }} />]
+    )}
+    console.log("RENDERING", markers);
+    return markers;
   }
 
   return (

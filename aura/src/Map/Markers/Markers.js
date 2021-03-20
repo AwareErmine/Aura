@@ -4,6 +4,7 @@ import { Marker } from 'google-maps-react';
 // const AnyReactComponent = ({ text }) => <div classname="test">{text}</div>;
 
 export function TreeMarker(props) {
+  console.log("HIIIII FROM THE MARKER");
   return (
     <Marker key={props.key} id={props.key} position={{
        lat: props.lat,
