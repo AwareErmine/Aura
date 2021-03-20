@@ -30,9 +30,11 @@ const containerStyle = {
 
 function Map(props) {
   const [datasets, setDatasets] = useState([]);
+  const [markers, setMarkers] = useState([]);
 
   const getData = async (url) => {
     const response = await axios.get(url);
+    console.log("DATA LENGTH", response.data.length)
     return response.data;
   }
 
@@ -42,27 +44,26 @@ function Map(props) {
       let data = getData(entry.url);
       data.then( (result) => {
         entry.data = result;
-        console.log("STILL IN THEN", JSON.stringify(entry.data));
+        setDatasets(initial_datasets);
       })
-      console.log("OUT OF THEN", JSON.stringify(entry.data))
     }
-    console.log("DATA AFTER ADDING DATA", initial_datasets[0].data);
-    console.log("INITIAL DATASETS", JSON.stringify(initial_datasets));
-    console.log("WHAT CHROME SEES AS THE OBJ", initial_datasets)
-    setDatasets(initial_datasets);
+    // console.log("DATA AFTER ADDING DATA", initial_datasets[0].data);
+    // console.log("INITIAL DATASETS", JSON.stringify(initial_datasets));
+    // console.log("WHAT CHROME SEES AS THE OBJ", initial_datasets)
+    // setDatasets(initial_datasets);
   }, [])
 
-  function DisplayMarkers() {
+  useEffect(() => {
     const on_data = datasets.filter( (entry) => entry.on );
-    console.log("ON", on_data);
+    // console.log("ON", on_data);
 
     var markers = [];
     for (var i in on_data) {
       let entry = on_data[i];
-      console.log("THE ENTRY", JSON.stringify(entry));
-      console.log("ENTRY DATA", entry.data);
-      console.log("AFTER RENDER", entry)
-      console.log("THERE IS DATA", entry.hasOwnProperty("data"));
+      // console.log("THE ENTRY", JSON.stringify(entry));
+      // console.log("ENTRY DATA", entry.data);
+      // console.log("AFTER RENDER", entry);
+      // console.log("THERE IS DATA", entry.hasOwnProperty("data"));
       markers = markers.concat(
         entry.data ? entry.data.map( (datapoint) => {
           return (
@@ -73,14 +74,45 @@ function Map(props) {
             })
           )
         })
-        : [<Marker key="asdfasdf" id="asdfasdf" position={{
+        : [null]
+         /* [<Marker key="asdfasdf" id="asdfasdf" position={{
            lat: 40.712742,
            lng: -74.013382
-         }} />]
+         }} />] */
     )}
-    console.log("RENDERING", markers);
-    return markers;
-  }
+    setMarkers(markers);
+  }, [datasets])
+
+  // function DisplayMarkers() {
+  //   const on_data = datasets.filter( (entry) => entry.on );
+  //   // console.log("ON", on_data);
+  //
+  //   var markers = [];
+  //   for (var i in on_data) {
+  //     let entry = on_data[i];
+  //     // console.log("THE ENTRY", JSON.stringify(entry));
+  //     // console.log("ENTRY DATA", entry.data);
+  //     // console.log("AFTER RENDER", entry);
+  //     // console.log("THERE IS DATA", entry.hasOwnProperty("data"));
+  //     markers = markers.concat(
+  //       entry.data ? entry.data.map( (datapoint) => {
+  //         return (
+  //           entry.marker({
+  //             lat: datapoint["latitude"],
+  //             lng: datapoint["longitude"],
+  //             key: datapoint["tree_id"]
+  //           })
+  //         )
+  //       })
+  //       : [null]
+  //        /* [<Marker key="asdfasdf" id="asdfasdf" position={{
+  //          lat: 40.712742,
+  //          lng: -74.013382
+  //        }} />] */
+  //   )}
+  //   console.log("RENDERING", markers);
+  //   return markers;
+  // }
 
   return (
     <GoogleMapReact
@@ -92,7 +124,7 @@ function Map(props) {
         }}
         containerStyle={containerStyle}
     >
-      { DisplayMarkers() }
+      { markers }
     </ GoogleMapReact>
   )
 }
