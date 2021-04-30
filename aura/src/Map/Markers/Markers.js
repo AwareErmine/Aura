@@ -14,7 +14,6 @@ export function TreeMarker(datapoint) {
         lat: datapoint["latitude"],
         lng: datapoint["longitude"]
       }}
-      alt="tree"
       icon={{
         url: tree,
         anchor: new window.google.maps.Point(5, 58),
